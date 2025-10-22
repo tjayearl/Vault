@@ -296,4 +296,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 3000); // Match animation duration
         }
     }
+
+    // --- Contact Form Logic ---
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate form submission
+            alert('Message sent! We’ll get back to you soon.');
+            contactForm.reset();
+        });
+    }
 });

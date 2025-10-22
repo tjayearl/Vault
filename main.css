@@ -472,7 +472,7 @@ body {
 }
 
 /* --- CTA Section --- */
-.cta-section {
+.cta-section, .contact-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -480,6 +480,145 @@ body {
     text-align: center;
     padding: 120px 5%;
     background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-primary));
+}
+
+.contact-section {
+    background: var(--bg-primary);
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-top: -40px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.contact-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.contact-info-panel {
+    background-color: var(--bg-secondary);
+    padding: 30px 40px;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-panel {
+    background-color: var(--bg-secondary);
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-panel .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form-panel label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.contact-form-panel .input-wrapper {
+    position: relative;
+}
+
+.contact-form-panel .input-wrapper i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.contact-form-panel input,
+.contact-form-panel textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.contact-form-panel .input-wrapper input {
+    padding-left: 45px;
+}
+
+.contact-form-panel textarea {
+    resize: vertical;
+}
+
+.contact-form-panel .btn-primary {
+    width: 100%;
+    padding: 15px;
+}
+.contact-form-panel .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
+}
+
+.social-responsibility-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 25px;
+    text-align: center;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.info-item:not(:last-child) {
+    margin-bottom: 25px;
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+    margin-top: 5px;
+}
+
+.info-item h4 {
+    margin: 0 0 5px;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.info-item p {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+.faq-link-container {
+    text-align: center;
+    margin-top: 50px;
+    color: var(--text-muted);
+}
+
+.faq-link-container a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+.faq-link-container a:hover {
+    text-decoration: underline;
 }
 
 .cta-section .section-title {
@@ -517,6 +656,16 @@ body {
     0% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
     50% { box-shadow: 0 0 35px rgba(255, 0, 127, 0.7); }
     100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
+}
+
+/* --- Final Tagline --- */
+.final-tagline {
+    text-align: center;
+    padding: 60px 5%;
+    background-color: var(--bg-primary);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: var(--text-muted);
 }
 
 /* --- Footer --- */
@@ -569,6 +718,29 @@ body {
 .footer-copyright p {
     margin: 0;
     font-size: 0.9rem;
+}
+
+/* --- Live Chat Icon --- */
+.live-chat-icon {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, var(--primary-blue), var(--secondary-pink));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+    z-index: 999;
+    transition: transform 0.3s ease;
+}
+
+.live-chat-icon:hover {
+    transform: scale(1.1);
 }
 
 /* --- Onboarding Modal --- */
