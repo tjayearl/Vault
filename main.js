@@ -54,15 +54,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Onboarding Modal Logic ---
-    const openAccountBtn = document.querySelector('.open-account-btn');
+    const openAccountBtns = document.querySelectorAll('.open-account-btn'); // Select all buttons that open the modal
     const onboardingOverlay = document.getElementById('onboardingOverlay');
     const closeOnboardingBtn = document.getElementById('closeOnboardingBtn');
 
-    if (openAccountBtn && onboardingOverlay && closeOnboardingBtn) {
-        openAccountBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            onboardingOverlay.classList.add('active');
+    if (openAccountBtns.length > 0 && onboardingOverlay && closeOnboardingBtn) {
+        openAccountBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                onboardingOverlay.classList.add('active');
+            });
         });
+
+        // Also handle the hero section's "Create Account" link if it's different
+        const heroCreateBtn = document.querySelector('.btn-cta');
+        if (heroCreateBtn && heroCreateBtn.classList.contains('open-account-btn')) {
+            // This is already covered by the querySelectorAll above
+        }
 
         closeOnboardingBtn.addEventListener('click', () => {
             onboardingOverlay.classList.remove('active');

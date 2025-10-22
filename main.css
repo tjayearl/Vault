@@ -97,22 +97,24 @@ body {
     color: var(--primary-blue);
 }
 
+/* "Open Account" - Bold, dominant CTA in header */
 .open-account-btn {
-    background: linear-gradient(45deg, var(--primary-blue), var(--secondary-pink));
+    background: var(--primary-blue);
     border: none;
     padding: 10px 20px;
     border-radius: 25px;
     color: white;
     font-size: 1rem;
     font-weight: 700;
+    font-family: 'Roboto', sans-serif;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
 }
 
 .open-account-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
 }
 
 /* --- Theme Switcher --- */
@@ -201,6 +203,10 @@ body {
     color: var(--text-muted);
 }
 
+.hero-actions {
+    position: relative;
+}
+
 .hero-buttons {
     display: flex;
     gap: 20px;
@@ -216,15 +222,31 @@ body {
     display: inline-block;
 }
 
+/* "Get Started" - Soft gradient */
 .btn-primary {
-    background: linear-gradient(45deg, var(--primary-blue), var(--secondary-pink));
+    background: linear-gradient(45deg, var(--primary-blue), #00a2c7);
     color: white;
-    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+}
+
+.get-started-btn i {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.5);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+}
+
+.get-started-btn:hover i {
+    transform: translateX(5px);
+}
+
+.get-started-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 15px;
 }
 
 .btn-secondary {
@@ -471,6 +493,7 @@ body {
     margin-bottom: 40px;
 }
 
+/* "Create Account" - Pulsing gradient */
 .btn-cta {
     background: linear-gradient(45deg, var(--primary-blue), var(--secondary-pink));
     color: white;
