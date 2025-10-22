@@ -76,21 +76,33 @@
             </section>
 
             <section class="quick-actions">
-                <a href="transfer.html" class="action-btn">
+                <a href="transfer.html" class="action-card" id="transfer-action">
                     <i class="fas fa-exchange-alt"></i>
-                    <span>Transfer Money</span>
+                    <div class="action-text">
+                        <h4>Transfer</h4>
+                        <p>Send funds securely</p>
+                    </div>
                 </a>
-                <div class="action-btn">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <span>Pay Bills</span>
+                <div class="action-card" id="pay-bills-action">
+                    <i class="fas fa-receipt"></i>
+                    <div class="action-text">
+                        <h4>Pay Bills</h4>
+                        <p>Settle your utilities</p>
+                    </div>
                 </div>
-                <div class="action-btn">
-                    <i class="fas fa-piggy-bank"></i>
-                    <span>Deposit Funds</span>
+                <div class="action-card" id="deposit-action">
+                    <i class="fas fa-sack-dollar"></i>
+                    <div class="action-text">
+                        <h4>Deposit</h4>
+                        <p>Add funds to your Vault</p>
+                    </div>
                 </div>
-                <div class="action-btn">
-                    <i class="fas fa-money-bill-wave"></i>
-                    <span>Withdraw</span>
+                <div class="action-card" id="withdraw-action">
+                    <i class="fas fa-atm"></i>
+                    <div class="action-text">
+                        <h4>Withdraw</h4>
+                        <p>Access your cash</p>
+                    </div>
                 </div>
             </section>
 
@@ -130,6 +142,170 @@
                 </div>
             </section>
         </main>
+    </div>
+
+    <!-- Pay Bills Modal -->
+    <div class="modal-overlay" id="payBillsModalOverlay">
+        <div class="modal-content">
+            <button class="close-modal-btn" id="closePayBillsModal">&times;</button>
+
+            <!-- Step 1: Form View -->
+            <div id="pay-bills-form-view">
+                <div class="modal-header">
+                    <h3>Pay a Bill</h3>
+                </div>
+                <div class="recent-bills">
+                    <h4>Recent Billers</h4>
+                    <div class="recent-bill-tags">
+                        <button class="bill-tag" data-biller="Kenya Power" data-ref="123456-01" data-amount="2000">Kenya Power</button>
+                        <button class="bill-tag" data-biller="Nairobi Water" data-ref="987654" data-amount="1500">Nairobi Water</button>
+                        <button class="bill-tag" data-biller="Zuku Fiber" data-ref="ZUKU123" data-amount="5000">Zuku Fiber</button>
+                    </div>
+                </div>
+                <form id="pay-bills-form">
+                    <div class="form-group">
+                        <label for="bill-type">Bill Type</label>
+                        <div class="input-wrapper"><i class="fas fa-bolt"></i><select id="bill-type" required><option value="">Select Biller</option><option value="Kenya Power">Kenya Power (Electricity)</option><option value="Nairobi Water">Nairobi Water</option><option value="Zuku Fiber">Zuku Fiber (Internet)</option><option value="Rent">Rent</option></select></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bill-ref">Account/Reference Number</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-hashtag"></i>
+                            <input type="text" id="bill-ref" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bill-amount">Amount (KSh)</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <input type="number" id="bill-amount" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bill-payment-method">Payment Method</label>
+                        <div class="input-wrapper"><i class="fas fa-wallet"></i><select id="bill-payment-method"><option>Wallet ($5,450.75)</option></select></div>
+                    </div>
+                    <div class="form-group schedule-payment-group">
+                        <label for="schedule-toggle" class="switch-label">Schedule for later?</label>
+                        <label class="switch"><input type="checkbox" id="schedule-toggle"><span class="slider round"></span></label>
+                    </div>
+                    <div class="form-group" id="schedule-date-group" style="display: none;">
+                        <label for="schedule-date">Payment Date</label>
+                        <input type="date" id="schedule-date">
+                    </div>
+                    <button type="submit" class="btn-primary" id="pay-bill-btn">
+                        <span class="btn-text">Pay Now</span>
+                        <i class="fas fa-spinner fa-spin btn-spinner" style="display: none;"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Step 2: Success View -->
+            <div id="pay-bills-success-view" style="display: none;">
+                <div class="success-animation">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h4>Bill Paid Successfully!</h4>
+                <p id="success-summary-text"></p>
+                <p class="success-ref" id="success-ref-text"></p>
+                <button type="button" class="btn-secondary" id="pay-another-bill-btn">Pay Another Bill</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div class="modal-overlay" id="depositModalOverlay">
+        <div class="modal-content">
+            <button class="close-modal-btn" id="closeDepositModal">&times;</button>
+
+            <!-- Step 1: Form View -->
+            <div id="deposit-form-view">
+                <div class="modal-header">
+                    <h3>Deposit Funds</h3>
+                </div>
+                <div class="connected-accounts">
+                    <h4>From Your Saved Deposit Methods</h4>
+                    <div class="account-list">
+                        <button class="account-item" data-method="Card" data-source="Visa - 1234"><span>💳 Visa</span><span>•••• 1234</span></button>
+                        <button class="account-item" data-method="Mobile Money" data-source="M-Pesa Wallet"><span>📱 M-Pesa</span><span>Wallet</span></button>
+                        <button class="account-item" data-method="Bank Transfer" data-source="Equity Bank"><span>🏦 Equity Bank</span><span>•••• 5678</span></button>
+                    </div>
+                </div>
+                <form id="deposit-form">
+                    <div class="form-group">
+                        <label for="deposit-method">Deposit Method</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-university"></i>
+                            <select id="deposit-method" required><option value="">Select Method</option><option value="Bank Transfer">Bank Transfer</option><option value="Card">Card</option><option value="Mobile Money">Mobile Money</option><option value="Cash Deposit">Cash Deposit</option></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="deposit-amount">
+                            Amount (KSh)
+                            <span class="tooltip-container">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="tooltip-text">Max deposit: KSh 150,000 per transaction.</span>
+                            </span>
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-dollar-sign"></i>
+                            <input type="number" id="deposit-amount" required placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="deposit-notes">Notes (Optional)</label>
+                        <div class="input-wrapper"><i class="fas fa-sticky-note"></i><input type="text" id="deposit-notes" placeholder="e.g., For savings"></div>
+                    </div>
+                    <button type="submit" class="btn-primary" id="confirm-deposit-btn"><span class="btn-text">Confirm Deposit</span><i class="fas fa-spinner fa-spin btn-spinner" style="display: none;"></i></button>
+                </form>
+            </div>
+
+            <!-- Step 2: Success View -->
+            <div id="deposit-success-view" style="display: none;">
+                <div class="success-animation"><i class="fas fa-check-circle"></i></div>
+                <h4>Deposit Successful!</h4>
+                <p id="deposit-success-summary"></p>
+                <div class="button-group"><a href="history.html" class="btn-secondary">View in History</a><button type="button" class="btn-primary" id="make-another-deposit-btn">Make Another Deposit</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div class="modal-overlay" id="withdrawModalOverlay">
+        <div class="modal-content">
+            <button class="close-modal-btn" id="closeWithdrawModal">&times;</button>
+
+            <!-- Step 1: Form View -->
+            <div id="withdraw-form-view">
+                <div class="modal-header">
+                    <h3>Withdraw Funds</h3>
+                </div>
+                <form id="withdraw-form">
+                    <div class="form-group"><label for="withdraw-from">From Account</label><div class="input-wrapper"><i class="fas fa-wallet"></i><select id="withdraw-from" required><option value="checking">Checking Account ($5,450.75)</option><option value="savings">Savings Account ($25,180.50)</option></select></div></div>
+                    <div class="form-group"><label for="withdraw-to">To Destination</label><div class="input-wrapper"><i class="fas fa-university"></i><select id="withdraw-to" required><option value="">Select Destination</option><option value="mpesa">M-Pesa Wallet</option><option value="equity">Equity Bank</option><option value="pickup">Cash Pickup Agent</option></select></div></div>
+                    <div class="form-group">
+                        <div class="label-group"><label for="withdraw-amount">Amount (KSh)</label><button type="button" id="withdraw-all-btn" class="withdraw-all-btn">Withdraw All</button></div>
+                        <div class="input-wrapper"><i class="fas fa-dollar-sign"></i><input type="number" id="withdraw-amount" required placeholder="0.00"></div>
+                        <p class="error-message" id="withdraw-amount-error"></p>
+                    </div>
+                    <div class="form-group"><label for="withdraw-notes">Notes (Optional)</label><div class="input-wrapper"><i class="fas fa-sticky-note"></i><input type="text" id="withdraw-notes" placeholder="e.g., For groceries"></div></div>
+                    <button type="submit" class="btn-primary" id="confirm-withdraw-btn"><span class="btn-text">Confirm Withdrawal</span><i class="fas fa-spinner fa-spin btn-spinner" style="display: none;"></i></button>
+                </form>
+                <div class="withdrawal-info">
+                    <p>Est. Processing Time: <span id="processing-time">--</span></p>
+                    <p>Fees: 1.5% (min KSh 50)</p>
+                    <p>Limit: KSh 300,000 per day</p>
+                </div>
+            </div>
+
+            <!-- Step 2: Success View -->
+            <div id="withdraw-success-view" style="display: none;">
+                <div class="success-animation"><i class="fas fa-check-circle"></i></div>
+                <h4>Withdrawal Successful!</h4>
+                <p id="withdraw-success-summary"></p>
+                <div class="button-group"><a href="history.html" class="btn-secondary">View in History</a><button type="button" class="btn-primary" id="make-another-withdrawal-btn">Make Another Withdrawal</button></div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
