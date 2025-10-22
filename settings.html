@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Vault</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+
+    <header class="top-nav">
+        <div class="logo">
+            <i class="fas fa-lock"></i>
+            <span>VAULT</span>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="header-right">
+            <span class="greeting" id="greeting">Welcome back, Tjay</span>
+            <div class="theme-switcher">
+                <input type="checkbox" id="theme-toggle" class="theme-toggle-checkbox">
+                <label for="theme-toggle" class="theme-toggle-label">
+                    <i class="fas fa-moon"></i><i class="fas fa-sun"></i></label>
+            </div>
+            <div class="notification-bell">
+                <i class="fas fa-bell"></i>
+                <span class="notification-dot"></span>
+            </div>
+            <div class="profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <a href="login.html" id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </header>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="transfer.html"><i class="fas fa-exchange-alt"></i> Transfer</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li class="active"><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <nav class="sidebar-footer">
+                <p>Last login:</p>
+                <p id="last-login-timestamp">Oct 26, 2024, 10:30 AM</p>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="settings-container">
+                <h2>Settings</h2>
+                <div class="integrity-status">
+                    <span>Vault Integrity Status:</span>
+                    <span class="status-secure">Secure <i class="fas fa-check-circle"></i></span>
+                </div>
+                <div class="card settings-card">
+                    <h3><i class="fas fa-user-edit"></i> Profile Settings</h3>
+                    <form id="profile-form">
+                        <div class="profile-picture-area">
+                            <img src="https://i.pinimg.com/736x/78/d7/00/78d700dd14cec1fddd8f3567317ff02f.jpg" alt="Profile Picture" class="profile-pic-large">
+                            <button type="button" class="btn-secondary change-pic-btn">Change</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" value="Tjay" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="tjay@example.com" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" value="+1 234 567 890" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" value="1995-08-15" disabled>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="edit-profile-btn" class="btn-primary">Edit Profile</button>
+                            <button type="submit" id="save-changes-btn" class="btn-primary" style="display: none;">Save Changes</button>
+                            <button type="button" id="cancel-btn" class="btn-secondary" style="display: none;">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card settings-card">
+                    <h3><i class="fas fa-shield-alt"></i> Security Settings</h3>
+                    <p class="security-note">We value your security — keep your Vault account safe.</p>
+
+                    <!-- Change Password Form -->
+                    <form id="change-password-form">
+                        <h4>Change Password</h4>
+                        <p class="last-changed-note">Last changed: 3 months ago</p>
+                        <div class="form-group">
+                            <label for="old-password">Old Password</label>
+                            <input type="password" id="old-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-new-password">Confirm New Password</label>
+                            <input type="password" id="confirm-new-password" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Update Password</button>
+                        </div>
+                    </form>
+
+                    <!-- Toggles Section -->
+                    <div class="toggles-section">
+                        <div class="toggle-item">
+                            <div class="toggle-text">
+                                <h5>Two-Factor Authentication (2FA)</h5>
+                                <p>Add an extra layer of security to your account.</p>
+                            </div>
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                        <div class="toggle-item">
+                            <div class="toggle-text">
+                                <h5>Login Alerts</h5>
+                                <p>Receive an email when a new login is detected.</p>
+                            </div>
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card settings-card">
+                    <h3><i class="fas fa-clipboard-list"></i> Activity Log</h3>
+                    <ul class="activity-log-list">
+                        <li>
+                            <div class="log-icon"><i class="fas fa-sign-in-alt"></i></div>
+                            <div class="log-details">
+                                <p>Successful login from a new device</p>
+                                <small>Oct 22, 2025, from Nairobi, Kenya (IP: 192.168.1.1)</small>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="log-icon"><i class="fas fa-key"></i></div>
+                            <div class="log-details">
+                                <p>Password was changed</p>
+                                <small>Jul 15, 2025</small>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card settings-card">
+                    <h3><i class="fas fa-bell"></i> Notification Preferences</h3>
+                    <div class="toggles-section">
+                        <div class="toggle-item">
+                            <div class="toggle-text">
+                                <h5>Transaction Alerts</h5>
+                                <p>Notify me about deposits, withdrawals, and transfers.</p>
+                            </div>
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                        <div class="toggle-item">
+                            <div class="toggle-text">
+                                <h5>Promotions</h5>
+                                <p>Receive updates on new products and special offers.</p>
+                            </div>
+                            <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+                        </div>
+                        <div class="toggle-item">
+                            <div class="toggle-text">
+                                <h5>Account Updates</h5>
+                                <p>Get important information about statements and terms.</p>
+                            </div>
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                        <div class="toggle-item">
+                            <div class="toggle-text">
+                                <h5>Security Notifications</h5>
+                                <p>Get alerts for new logins or password changes.</p>
+                            </div>
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card settings-card">
+                    <h3><i class="fas fa-question-circle"></i> Support / Help</h3>
+                    <p class="security-note">Our support team is available 24/7 to help keep your Vault secure.</p>
+                    <div class="support-options">
+                        <button type="button" class="support-btn">
+                            <i class="fas fa-comments"></i>
+                            <span>Chat with Support</span>
+                        </button>
+                        <a href="mailto:support@vault.example.com" class="support-btn"><i class="fas fa-envelope"></i><span>Email Support</span></a>
+                        <a href="#" class="support-btn"><i class="fas fa-book"></i><span>View FAQs</span></a>
+                    </div>
+                </div>
+
+                <div class="card settings-card">
+                    <h3><i class="fas fa-door-open"></i> Account Management</h3>
+                    <div class="account-actions">
+                        <p>Log out from your account on this device.</p>
+                        <button type="button" id="logout-action-btn" class="btn-secondary">Logout</button>
+                    </div>
+                    <div class="account-actions danger-zone">
+                        <p>Permanently deactivate your account. This action cannot be undone.</p>
+                        <button type="button" id="deactivate-action-btn" class="btn-danger">Deactivate Account</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="confirmation-modal-overlay" id="confirmationModalOverlay">
+        <div class="confirmation-modal-content">
+            <h4 id="modal-title">Are you sure?</h4>
+            <p id="modal-text">This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button type="button" id="modal-cancel-btn" class="btn-secondary">Cancel</button>
+                <button type="button" id="modal-confirm-btn" class="btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+    <script src="settings.js"></script>
+</body>
+</html>
