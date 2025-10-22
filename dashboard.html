@@ -106,6 +106,20 @@
                 </div>
             </section>
 
+            <section class="savings-goals-area">
+                <div class="card savings-goal-card">
+                    <div class="card-header">
+                        <h3>Savings Goals</h3>
+                        <button class="btn-secondary add-goal-btn">+ Add New Goal</button>
+                    </div>
+                    <div id="goals-list">
+                        <!-- Goal items will be dynamically inserted here -->
+                    </div>
+                    <p id="no-goals-message" style="display: none; text-align: center; color: var(--text-muted); padding: 20px 0;">You have no active savings goals. Click "+ Add New Goal" to start!</p>
+                </div>
+                <p class="section-footer-note">Set, save, and achieve — one goal at a time.</p>
+            </section>
+
             <section class="transactions-area">
                 <div class="card transactions-card">
                     <h3>Recent Transactions</h3>
@@ -144,6 +158,7 @@
         </main>
     </div>
 
+    <div id="confetti-container"></div>
     <!-- Pay Bills Modal -->
     <div class="modal-overlay" id="payBillsModalOverlay">
         <div class="modal-content">
@@ -305,6 +320,42 @@
                 <p id="withdraw-success-summary"></p>
                 <div class="button-group"><a href="history.html" class="btn-secondary">View in History</a><button type="button" class="btn-primary" id="make-another-withdrawal-btn">Make Another Withdrawal</button></div>
             </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Goal Modal -->
+    <div class="modal-overlay" id="goalModalOverlay">
+        <div class="modal-content">
+            <button class="close-modal-btn" id="closeGoalModal">&times;</button>
+            <div class="modal-header">
+                <h3 id="goal-modal-title">Add New Goal</h3>
+            </div>
+            <form id="goal-form">
+                <input type="hidden" id="goal-id">
+                <div class="form-group"><label for="goal-icon-input">Icon (e.g., 🎯, 🚗, 🏖️)</label><input type="text" id="goal-icon-input" placeholder="🎯" required></div>
+                <div class="form-group"><label for="goal-name-input">Goal Name</label><input type="text" id="goal-name-input" placeholder="e.g., Buy a Car" required></div>
+                <div class="form-group"><label for="goal-target-input">Target Amount ($)</label><input type="number" id="goal-target-input" placeholder="10000" required></div>
+                <div class="form-group"><label for="goal-deadline-input">Deadline</label><input type="date" id="goal-deadline-input"></div>
+                <button type="submit" class="btn-primary">Save Goal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Progress Modal -->
+    <div class="modal-overlay" id="progressModalOverlay">
+        <div class="modal-content" style="max-width: 400px;">
+            <button class="close-modal-btn" id="closeProgressModal">&times;</button>
+            <div class="modal-header">
+                <h3>Add to Goal</h3>
+            </div>
+            <form id="progress-form">
+                <input type="hidden" id="progress-goal-id">
+                <div class="form-group">
+                    <label for="progress-amount-input">Amount to Add ($)</label>
+                    <input type="number" id="progress-amount-input" placeholder="100" required>
+                </div>
+                <button type="submit" class="btn-primary">Add Progress</button>
+            </form>
         </div>
     </div>
 

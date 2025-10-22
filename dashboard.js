@@ -315,9 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const amountInput = document.getElementById('withdraw-amount');
         const amountError = document.getElementById('withdraw-amount-error');
         const fromAccountSelect = document.getElementById('withdraw-from');
-        const toDestinationSelect = document.getElementById('withdraw-to');
-        const withdrawAllBtn = document.getElementById('withdraw-all-btn');
-        const processingTimeEl = document.getElementById('processing-time');
 
         const accountBalances = {
             checking: 5450.75,
@@ -325,38 +322,12 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const openModal = () => withdrawModalOverlay.classList.add('active');
-        const closeModal = () => {
-            withdrawModalOverlay.classList.remove('active');
-            withdrawForm.reset();
-            amountError.textContent = '';
-            processingTimeEl.textContent = '--';
-        };
+        const closeModal = () => withdrawModalOverlay.classList.remove('active');
 
         withdrawAction.addEventListener('click', openModal);
         closeWithdrawModalBtn.addEventListener('click', closeModal);
         withdrawModalOverlay.addEventListener('click', (e) => {
             if (e.target === withdrawModalOverlay) closeModal();
-        });
-
-        // "Withdraw All" button logic
-        withdrawAllBtn.addEventListener('click', () => {
-            const selectedAccount = fromAccountSelect.value;
-            amountInput.value = accountBalances[selectedAccount];
-        });
-
-        // Update processing time based on destination
-        toDestinationSelect.addEventListener('change', () => {
-            const destination = toDestinationSelect.value;
-            const processingTimes = {
-                'mpesa': 'Instant',
-                'equity': '1-2 hours',
-                'pickup': '30 minutes',
-                '': '--'
-            };
-            processingTimeEl.textContent = processingTimes[destination] || 'N/A';
-        });
-        fromAccountSelect.addEventListener('change', () => {
-            amountInput.value = ''; // Clear amount when source changes
         });
 
         // Handle form submission
@@ -410,6 +381,180 @@ document.addEventListener('DOMContentLoaded', () => {
             successView.style.display = 'none';
             formView.style.display = 'block';
             withdrawForm.reset();
+            amountError.textContent = '';
         });
     }
+
+    // --- Savings Goals Logic ---
+    const goalsList = document.getElementById('goals-list');
+    const addGoalBtn = document.querySelector('.add-goal-btn');
+    const goalModalOverlay = document.getElementById('goalModalOverlay');
+    const closeGoalModalBtn = document.getElementById('closeGoalModal');
+    const goalForm = document.getElementById('goal-form');
+    const goalModalTitle = document.getElementById('goal-modal-title');
+    const noGoalsMessage = document.getElementById('no-goals-message');
+
+    const progressModalOverlay = document.getElementById('progressModalOverlay');
+    const closeProgressModalBtn = document.getElementById('closeProgressModal');
+    const progressForm = document.getElementById('progress-form');
+
+    // In-memory storage for goals
+    let savingsGoals = [
+        { id: 1, name: 'Trip to Dubai', icon: '🏖️', saved: 1800, target: 3000, deadline: '2025-12-30' }
+    ];
+
+    function renderGoals() {
+        goalsList.innerHTML = '';
+        if (savingsGoals.length === 0) {
+            noGoalsMessage.style.display = 'block';
+        } else {
+            noGoalsMessage.style.display = 'none';
+            savingsGoals.forEach(goal => {
+                const percentage = Math.min(Math.floor((goal.saved / goal.target) * 100), 100);
+                const isCompleted = percentage >= 100;
+                const motivationalText = percentage >= 100 ? 'Goal Achieved! 🎉' : `You’re ${percentage}% there — keep going!`;
+
+                const goalElement = document.createElement('div');
+                goalElement.className = `goal-item ${isCompleted ? 'completed' : ''}`;
+                goalElement.innerHTML = `
+                    <div class="goal-header">
+                        <p class="goal-name">${goal.icon} ${goal.name}</p>
+                        <div class="goal-actions">
+                            <button class="goal-action-btn" data-action="add" data-id="${goal.id}">Add More</button>
+                            <button class="goal-action-btn" data-action="edit" data-id="${goal.id}">Edit</button>
+                            <button class="goal-action-btn delete" data-action="delete" data-id="${goal.id}">Delete</button>
+                        </div>
+                    </div>
+                    <div class="goal-details">
+                        <p>💰 Saved: <span class="saved-amount">$${goal.saved.toLocaleString()}</span> / $${goal.target.toLocaleString()}</p>
+                        <p>📅 Deadline: ${new Date(goal.deadline).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width: ${percentage}%;"><span>${percentage}% Complete</span></div>
+                    </div>
+                    <p class="motivational-text">${motivationalText}</p>
+                `;
+                goalsList.appendChild(goalElement);
+            });
+        }
+    }
+
+    // --- Event Listeners for Modals ---
+    addGoalBtn.addEventListener('click', () => {
+        goalModalTitle.textContent = 'Add New Goal';
+        goalForm.reset();
+        document.getElementById('goal-icon-input').value = '🎯'; // Default icon
+        document.getElementById('goal-id').value = '';
+        goalModalOverlay.classList.add('active');
+    });
+
+    closeGoalModalBtn.addEventListener('click', () => goalModalOverlay.classList.remove('active'));
+    goalModalOverlay.addEventListener('click', (e) => {
+        if (e.target === goalModalOverlay) goalModalOverlay.classList.remove('active');
+    });
+
+    closeProgressModalBtn.addEventListener('click', () => progressModalOverlay.classList.remove('active'));
+    progressModalOverlay.addEventListener('click', (e) => {
+        if (e.target === progressModalOverlay) progressModalOverlay.classList.remove('active');
+    });
+
+    // Handle Add/Edit Goal Form
+    goalForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('goal-id').value;
+        const icon = document.getElementById('goal-icon-input').value;
+        const name = document.getElementById('goal-name-input').value;
+        const target = parseFloat(document.getElementById('goal-target-input').value);
+        const deadline = document.getElementById('goal-deadline-input').value;
+
+        if (id) { // Editing existing goal
+            const goal = savingsGoals.find(g => g.id == id);
+            goal.icon = icon;
+            goal.name = name;
+            goal.target = target;
+            goal.deadline = deadline;
+        } else { // Adding new goal
+            const newGoal = {
+                id: Date.now(),
+                icon,
+                name,
+                saved: 0,
+                target,
+                deadline
+            };
+            savingsGoals.push(newGoal);
+        }
+        renderGoals();
+        goalModalOverlay.classList.remove('active');
+    });
+
+    // Handle "Add More", "Edit", "Delete" using event delegation
+    goalsList.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target.classList.contains('goal-action-btn')) {
+            const action = target.dataset.action;
+            const id = parseInt(target.dataset.id);
+
+            if (action === 'delete') {
+                if (confirm('Are you sure you want to delete this goal?')) {
+                    savingsGoals = savingsGoals.filter(g => g.id !== id);
+                    renderGoals();
+                }
+            } else if (action === 'edit') {
+                const goal = savingsGoals.find(g => g.id === id);
+                goalModalTitle.textContent = 'Edit Goal';
+                document.getElementById('goal-id').value = goal.id;
+                document.getElementById('goal-icon-input').value = goal.icon;
+                document.getElementById('goal-name-input').value = goal.name;
+                document.getElementById('goal-target-input').value = goal.target;
+                document.getElementById('goal-deadline-input').value = goal.deadline;
+                goalModalOverlay.classList.add('active');
+            } else if (action === 'add') {
+                document.getElementById('progress-goal-id').value = id;
+                progressModalOverlay.classList.add('active');
+            }
+        }
+    });
+
+    // Handle Add Progress Form
+    progressForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = parseInt(document.getElementById('progress-goal-id').value);
+        const amount = parseFloat(document.getElementById('progress-amount-input').value);
+        const goal = savingsGoals.find(g => g.id === id);
+
+        if (goal && amount > 0) {
+            const wasCompleted = goal.saved >= goal.target;
+            goal.saved += amount;
+            const isNowCompleted = goal.saved >= goal.target;
+
+            // Trigger confetti only when the goal is first completed
+            if (isNowCompleted && !wasCompleted) {
+                triggerConfetti();
+            }
+        }
+        renderGoals();
+        progressModalOverlay.classList.remove('active');
+        progressForm.reset();
+    });
+
+    function triggerConfetti() {
+        const container = document.getElementById('confetti-container');
+        for (let i = 0; i < 150; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = `${Math.random() * 100}vw`;
+            confetti.style.animationDelay = `${Math.random() * 3}s`;
+            confetti.style.animationDuration = `${2 + Math.random() * 2}s`;
+            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            container.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+    }
+
+    // Initial render
+    renderGoals();
 });
