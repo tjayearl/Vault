@@ -150,6 +150,121 @@
         </div>
     </footer>
 
+    <!-- Onboarding Modal -->
+    <div class="onboarding-overlay" id="onboardingOverlay">
+        <div class="onboarding-header">
+            <div class="onboarding-progress">
+                <div class="progress-step active" data-step="1">1</div>
+                <div class="progress-step" data-step="2">2</div>
+                <div class="progress-step" data-step="3">3</div>
+                <div class="progress-step" data-step="4">4</div>
+            </div>
+            <button class="close-onboarding-btn" id="closeOnboardingBtn">&times;</button>
+        </div>
+        <div class="onboarding-step active" id="onboarding-step-1">
+            <div class="onboarding-content">
+                <h2 class="onboarding-title"><i class="fas fa-user-plus"></i>Welcome to Vault 👋<br>Let’s set up your secure account.</h2>
+                <form id="onboarding-form-1">
+                    <div class="form-group">
+                        <input type="text" id="onboarding-name" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="onboarding-email" placeholder="Email Address" required>
+                    </div>
+                    <div class="onboarding-actions">
+                        <button type="button" class="btn btn-primary" id="continue-step-1">Continue &rarr;</button>
+                    </div>
+                </form>
+                <p class="reassurance-note">You’re doing great! We’ll never share your personal information.</p>
+            </div>
+        </div>
+        <div class="onboarding-step" id="onboarding-step-2">
+            <div class="onboarding-content">
+                <h2 class="onboarding-title"><i class="fas fa-tasks"></i>Choose the Vault account that fits you best.</h2>
+                <div class="account-type-container">
+                    <div class="account-type-card" data-account-type="savings">
+                        <i class="fas fa-piggy-bank"></i>
+                        <h4>Savings Account</h4>
+                        <p>For everyday banking and saving.</p>
+                    </div>
+                    <div class="account-type-card" data-account-type="business">
+                        <i class="fas fa-briefcase"></i>
+                        <h4>Business Account</h4>
+                        <p>Manage transactions for your company.</p>
+                    </div>
+                    <div class="account-type-card" data-account-type="student">
+                        <i class="fas fa-user-graduate"></i>
+                        <h4>Student Account</h4>
+                        <p>For learners, with no fees and bonus rewards.</p>
+                    </div>
+                </div>
+                <div class="onboarding-actions">
+                    <button type="button" class="btn btn-secondary" id="back-to-step-1">&larr; Back</button>
+                    <button type="button" class="btn btn-primary" id="continue-step-2" disabled>Continue &rarr;</button>
+                </div>
+                <p class="reassurance-note">Almost done! You can always change this later.</p>
+            </div>
+        </div>
+        <div class="onboarding-step" id="onboarding-step-3">
+            <div class="onboarding-content">
+                <h2 class="onboarding-title"><i class="fas fa-shield-alt"></i>Protect your Vault.</h2>
+                <form id="onboarding-form-3">
+                    <div class="form-group">
+                        <input type="password" id="onboarding-password" placeholder="Create Password" required>
+                        <div class="password-strength-meter">
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                        </div>
+                        <p class="strength-text"></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="onboarding-confirm-password" placeholder="Confirm Password" required>
+                    </div>
+                    <div class="onboarding-actions">
+                        <button type="button" class="btn btn-secondary" id="back-to-step-2">&larr; Back</button>
+                        <button type="button" class="btn btn-primary" id="continue-step-3">Next &rarr;</button>
+                    </div>
+                </form>
+                <p class="reassurance-note">Welcome to the future of banking.</p>
+            </div>
+        </div>
+        <div class="onboarding-step" id="onboarding-step-4">
+            <div class="onboarding-content">
+                <div id="otp-view">
+                    <h2 class="onboarding-title"><i class="fas fa-check-double"></i>Verify your identity.</h2>
+                    <p class="reassurance-note" style="animation: none; opacity: 1; margin-top: -20px; margin-bottom: 30px;">An OTP has been sent to your email.</p>
+                    <form id="onboarding-form-4">
+                        <div class="form-group">
+                            <input type="text" id="onboarding-otp" placeholder="_ _ _ _ _ _" maxlength="6" required>
+                        </div>
+                        <div class="onboarding-actions">
+                            <button type="button" class="btn btn-secondary" id="back-to-step-3">&larr; Back</button>
+                            <button type="button" class="btn btn-primary" id="continue-step-4">Verify & Create Account</button>
+                        </div>
+                    </form>
+                    <p class="otp-timer-text">Resend code in <span id="otp-timer">60</span>s</p>
+                </div>
+                <div id="final-success-view" style="display: none;">
+                    <div class="confetti-container"></div>
+                    <h2 class="onboarding-title" id="final-welcome-message">Welcome to Vault!</h2>
+                    <p class="reassurance-note" style="animation: none; opacity: 1; margin-top: -20px; margin-bottom: 30px;">Your secure account is ready.</p>
+                    <div class="account-summary-card">
+                        <p><span>Account Type:</span> <span id="summary-account-type"></span></p>
+                        <p><span>Status:</span> <span id="summary-status"></span></p>
+                        <p><span>Balance:</span> <span id="summary-balance"></span></p>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="go-to-dashboard-btn">Go to Dashboard</button>
+                    <div class="confetti-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transition Overlay for redirecting to dashboard -->
+    <div class="transition-overlay" id="transitionOverlay"></div>
+
     <script src="main.js"></script>
 </body>
 </html>
