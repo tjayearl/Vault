@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Vault</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <header class="top-nav">
+        <div class="logo">
+            <i class="fas fa-lock"></i>
+            <span>VAULT</span>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="header-right">
+            <span class="greeting" id="greeting">Welcome back, Tjay</span>
+            <div class="theme-switcher">
+                <input type="checkbox" id="theme-toggle" class="theme-toggle-checkbox">
+                <label for="theme-toggle" class="theme-toggle-label">
+                    <i class="fas fa-moon"></i><i class="fas fa-sun"></i></label>
+            </div>
+            <div class="notification-bell">
+                <i class="fas fa-bell"></i>
+                <span class="notification-dot"></span>
+            </div>
+            <div class="profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <a href="login.html" id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </header>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="transfer.html"><i class="fas fa-exchange-alt"></i> Transfer</a></li>
+                    <li><a href="#"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <nav class="sidebar-footer">
+                <p>Last login:</p>
+                <p id="last-login-timestamp">Oct 26, 2024, 10:30 AM</p>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="summary-cards">
+                <div class="card balance-card">
+                    <h3>Current Balance</h3>
+                    <p class="balance-amount" id="balance-amount">$0.00</p>
+                </div>
+                <div class="card mini-card">
+                    <i class="fas fa-university icon-checking"></i>
+                    <h4>Savings Account</h4>
+                    <p>$25,180.50</p>
+                </div>
+                <div class="card mini-card">
+                    <i class="fas fa-wallet icon-savings"></i>
+                    <h4>Checking Account</h4>
+                    <p>$5,450.75</p>
+                </div>
+                <div class="card mini-card">
+                    <i class="fas fa-credit-card icon-credit"></i>
+                    <h4>Credit Card Balance</h4>
+                    <p class="debt">$-450.25</p>
+                </div>
+            </section>
+
+            <section class="quick-actions">
+                <a href="transfer.html" class="action-btn">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transfer Money</span>
+                </a>
+                <div class="action-btn">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>Pay Bills</span>
+                </div>
+                <div class="action-btn">
+                    <i class="fas fa-piggy-bank"></i>
+                    <span>Deposit Funds</span>
+                </div>
+                <div class="action-btn">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Withdraw</span>
+                </div>
+            </section>
+
+            <section class="transactions-area">
+                <div class="card transactions-card">
+                    <h3>Recent Transactions</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Oct 26, 2024</td><td><i class="fas fa-arrow-up deposit"></i> Deposit from Employer</td><td>+$2,500.00</td><td><span class="status completed">Completed</span></td></tr>
+                                <tr><td>Oct 25, 2024</td><td><i class="fas fa-arrow-down withdrawal"></i> Online Shopping</td><td>-$124.50</td><td><span class="status completed">Completed</span></td></tr>
+                                <tr><td>Oct 24, 2024</td><td><i class="fas fa-arrow-down withdrawal"></i> Grocery Store</td><td>-$85.30</td><td><span class="status completed">Completed</span></td></tr>
+                                <tr><td>Oct 23, 2024</td><td><i class="fas fa-arrow-up deposit"></i> Transfer from Savings</td><td>+$500.00</td><td><span class="status completed">Completed</span></td></tr>
+                                <tr><td>Oct 22, 2024</td><td><i class="fas fa-arrow-down withdrawal"></i> Gas Station</td><td>-$45.00</td><td><span class="status pending">Pending</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="charts-area">
+                <div class="card chart-card">
+                    <h3>Expense Categories</h3>
+                    <canvas id="expenseChart"></canvas>
+                </div>
+                <div class="card chart-card">
+                    <h3>Spending Trends</h3>
+                    <canvas id="spendingTrendsChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

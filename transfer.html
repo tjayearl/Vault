@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Money - Vault</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="transfer.css">
+</head>
+<body>
+
+    <header class="top-nav">
+        <div class="logo">
+            <i class="fas fa-lock"></i>
+            <span>VAULT</span>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="header-right">
+            <span class="greeting" id="greeting">Welcome back, Tjay</span>
+            <div class="theme-switcher">
+                <input type="checkbox" id="theme-toggle" class="theme-toggle-checkbox">
+                <label for="theme-toggle" class="theme-toggle-label">
+                    <i class="fas fa-moon"></i><i class="fas fa-sun"></i></label>
+            </div>
+            <div class="notification-bell">
+                <i class="fas fa-bell"></i>
+                <span class="notification-dot"></span>
+            </div>
+            <div class="profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <a href="login.html" id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </header>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li class="active"><a href="transfer.html"><i class="fas fa-exchange-alt"></i> Transfer</a></li>
+                    <li><a href="#"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <nav class="sidebar-footer">
+                <p>Last login:</p>
+                <p id="last-login-timestamp">Oct 26, 2024, 10:30 AM</p>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="transfer-container card">
+                <h2>Send Money</h2>
+                <div class="progress-bar">
+                    <div class="step active" id="step-1">1. Details</div>
+                    <div class="step" id="step-2">2. Review</div>
+                    <div class="step" id="step-3">3. Complete</div>
+                </div>
+
+                <!-- Step 1: Details -->
+                <form id="transfer-form-step1" class="form-step active">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="from-account">From Account</label>
+                            <select id="from-account" name="from-account">
+                                <option value="checking">Checking Account ($5,450.75)</option>
+                                <option value="savings">Savings Account ($25,180.50)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="to-account">To Account / Recipient</label>
+                            <input type="text" id="to-account" name="to-account" placeholder="Account number or select saved">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" name="amount" placeholder="$0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description (Optional)</label>
+                        <input type="text" id="description" name="description" placeholder="e.g., Rent payment">
+                    </div>
+                    <div class="form-group">
+                        <label>Transfer Type</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="transfer-type" value="internal" checked> Vault to Vault</label>
+                            <label><input type="radio" name="transfer-type" value="external"> External Bank</label>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-primary" id="next-to-step2">Next: Review</button>
+                </form>
+
+                <!-- Step 2: Review -->
+                <div id="transfer-form-step2" class="form-step review-step">
+                    <h3>Review Your Transfer</h3>
+                    <div id="review-details"></div>
+                    <div class="button-group">
+                        <button type="button" class="btn-secondary" id="back-to-step1">Back</button>
+                        <button type="button" class="btn-primary" id="confirm-transfer">Confirm & Send</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Complete -->
+                <div id="transfer-form-step3" class="form-step success-step">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Transfer Successful! 💸</h3>
+                    <div class="success-summary card">
+                        <h4>Transaction Summary</h4>
+                        <div id="success-summary-details"></div>
+                    </div>
+                    <div class="button-group">
+                        <a href="#" class="btn-secondary">View Transaction History</a>
+                        <button type="button" class="btn-primary" id="make-another-transfer">Make Another Transfer</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+    <script src="transfer.js"></script>
+</body>
+</html>

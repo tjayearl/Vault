@@ -20,40 +20,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Login Form Submission with Spinner ---
     const mainLoginForm = document.querySelector('.login-box form:not(#signupForm)');
-    if (mainLoginForm) {
-        const loginButton = mainLoginForm.querySelector('.login-button');
-        const loadingSpinner = mainLoginForm.querySelector('.loading-spinner');
+    if (mainLoginForm) { // This block handles the login page form
+        mainLoginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            // For demo purposes, we'll just trigger the transition
+            triggerTransition("Tjay"); // In a real app, you'd get the user's name
+        });
+    }
 
-        if (loginButton && loadingSpinner) {
-            mainLoginForm.addEventListener('submit', function (event) {
-                event.preventDefault();
+    // --- Transition Logic ---
+    function triggerTransition(userName) {
+        const transitionOverlay = document.getElementById('transitionOverlay');
+        const transitionText = document.getElementById('transitionText');
+        const transitionIcon = document.getElementById('transitionIcon');
 
-                loginButton.disabled = true;
-                loginButton.style.opacity = '0.7';
-                loadingSpinner.style.display = 'block';
+        if (!transitionOverlay || !transitionText || !transitionIcon) return;
 
-                setTimeout(() => {
-                    alert('Simulated login attempt.');
-                    loginButton.disabled = false;
-                    loginButton.style.opacity = '1';
-                    loadingSpinner.style.display = 'none';
-                }, 2000);
-            });
-        }
+        // 1. Show the transition overlay
+        transitionOverlay.classList.add('active');
+
+        // 2. After a delay, change text to "Access Granted"
+        setTimeout(() => {
+            transitionText.textContent = "Access Granted";
+        }, 1500);
+
+        // 3. After another delay, change text to "Welcome Back"
+        setTimeout(() => {
+            transitionText.textContent = `Welcome back, ${userName}!`;
+        }, 2800);
+
+        // 4. After the full animation, redirect to the dashboard
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 4000);
     }
 
     // --- Forgot Password Modal Logic ---
     const forgotPasswordLink = document.querySelector('.forgot-password-link');
     if (forgotPasswordLink) {
+        const loginFormContainer = document.getElementById('loginFormContainer');
         const forgotPasswordModalOverlay = document.getElementById('forgotPasswordModalOverlay');
         const closeForgotPasswordModalBtn = document.getElementById('closeForgotPasswordModal');
         const forgotPasswordForm = document.getElementById('forgotPasswordForm');
         const modalSendingAnimation = document.querySelector('.modal-sending-animation');
         const modalConfirmationMessage = document.querySelector('.modal-confirmation-message');
 
-        if (forgotPasswordModalOverlay && closeForgotPasswordModalBtn && forgotPasswordForm) {
+        if (loginFormContainer && forgotPasswordModalOverlay && closeForgotPasswordModalBtn && forgotPasswordForm) {
             forgotPasswordLink.addEventListener('click', (event) => {
                 event.preventDefault();
+                loginFormContainer.classList.add('fade-out'); // Fade out login form
                 forgotPasswordModalOverlay.classList.add('active');
                 forgotPasswordForm.style.display = 'block';
                 modalSendingAnimation.style.display = 'none';
@@ -61,7 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('forgotEmail').value = '';
             });
 
-            const closeModal = () => forgotPasswordModalOverlay.classList.remove('active');
+            const closeModal = () => {
+                forgotPasswordModalOverlay.classList.remove('active');
+                loginFormContainer.classList.remove('fade-out'); // Fade in login form
+            };
 
             closeForgotPasswordModalBtn.addEventListener('click', closeModal);
             forgotPasswordModalOverlay.addEventListener('click', (event) => {
@@ -107,10 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
             signupButton.textContent = 'Creating...';
 
             setTimeout(() => {
-                alert('Welcome to Vault! Your account has been created successfully.');
-                // Redirect to the login page after successful creation
-                window.location.href = 'login.html';
-            }, 2000);
+                triggerTransition("New User"); // Trigger transition after signup
+            }, 1500);
         });
     }
 });

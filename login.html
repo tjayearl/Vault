@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <div class="login-box">
+    <div class="login-box" id="loginFormContainer">
         <div class="logo-container">
             <i class="fas fa-lock"></i>
             <h2>Vault</h2>
@@ -70,6 +70,16 @@
                 <p class="security-note">For your security, the link will expire in 10 minutes.</p>
                 <button class="login-button close-modal-btn">Close</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Transition Overlay -->
+    <div class="transition-overlay" id="transitionOverlay">
+        <div class="transition-content">
+            <div class="unlock-animation">
+                <i class="fas fa-lock" id="transitionIcon"></i>
+            </div>
+            <p id="transitionText">Verifying credentials...</p>
         </div>
     </div>
 
