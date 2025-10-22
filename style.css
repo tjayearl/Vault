@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;500&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(170deg, #0a0f24 0%, #000000 100%); /* Deep blue to black */
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.logo-container i {
+    font-size: 2.5rem;
+    color: #00d4ff;
+}
+
+.logo-container h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: #f0f0f0;
+    margin: 10px 0 5px;
+}
+
+.tagline {
+    font-size: 0.9rem;
+    color: #b0c4de;
+    margin: 0;
+}
+
+.login-box {
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 360px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.signup-box {
+    max-width: 420px; /* A bit wider for the longer form */
+}
+
+.input-group .input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8a9ec1; /* Matches placeholder color */
+    font-size: 1rem;
+    pointer-events: none; /* Allows clicks to pass through to the input */
+    z-index: 1; /* Ensure icon is above input background */
+}
+
+.input-group #togglePassword {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8a9ec1;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding-left: 45px; /* Make space for the icon */
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+input::placeholder {
+    color: #8a9ec1;
+}
+
+input:focus {
+    outline: none;
+    border-color: #00d4ff;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #007bff, #00d4ff); /* royal blue to cyan */
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth hover effects already present */
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.6); /* Subtle neon blue glow */
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.login-button {
+    margin-bottom: 15px; /* Space below button, before spinner */
+}
+
+.loading-spinner {
+    text-align: center;
+    margin-bottom: 15px; /* Space after spinner, before form-footer-links */
+    color: #00d4ff; /* Cyan color for the spinner */
+    font-size: 1.8rem;
+}
+
+.security-tips {
+    margin-top: 30px; /* Space after form-footer-links */
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.security-tips p {
+    font-size: 0.85rem;
+    color: #b0c4de; /* Muted text color */
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.security-tips p i {
+    color: #ffc107; /* A warning/attention color for icons */
+    font-size: 1rem;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #b0c4de;
+    cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    margin-right: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.remember-me input[type="checkbox"]:checked {
+    background-color: #00d4ff;
+    border-color: #00d4ff;
+}
+
+.form-footer-links {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.form-footer-links a {
+    color: #00d4ff; /* Cyan for links */
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.form-footer-links a:hover {
+    color: #007bff; /* Royal blue on hover */
+    text-decoration: underline;
+}
+
+.form-footer-links p {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #b0c4de; /* Muted text color */
+}
+
+/* --- Forgot Password Modal --- */
+.forgot-password-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.forgot-password-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.forgot-password-modal-content {
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    text-align: center;
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.forgot-password-modal-overlay.active .forgot-password-modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal-btn:hover {
+    color: #ff007f;
+}
+
+.modal-header {
+    margin-bottom: 30px;
+}
+
+.modal-header h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: #00d4ff;
+    margin-bottom: 10px;
+}
+
+.modal-tagline {
+    font-size: 1rem;
+    color: #b0c4de;
+}
+
+#forgotPasswordForm .input-group {
+    margin-bottom: 25px;
+}
+
+#forgotPasswordForm .login-button {
+    margin-top: 0; /* Override default margin-top */
+}
+
+.modal-sending-animation,
+.modal-confirmation-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px; /* Ensure consistent height */
+}
+
+.modal-sending-animation i {
+    font-size: 3.5rem;
+    color: #00d4ff;
+    margin-bottom: 20px;
+}
+
+.modal-sending-animation p {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+}
+
+.modal-confirmation-message i {
+    font-size: 3.5rem;
+    color: #28a745; /* Green checkmark */
+    margin-bottom: 20px;
+}
+
+.modal-confirmation-message p {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 10px;
+}
+
+.security-note {
+    font-size: 0.9rem;
+    color: #ffc107; /* Warning color */
+    margin-top: 15px;
+}

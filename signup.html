@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Vault</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-box signup-box">
+        <div class="logo-container">
+            <i class="fas fa-user-plus"></i>
+            <h2>Create Account</h2>
+            <p class="tagline">Join the future of secure banking.</p>
+        </div>
+        <form id="signupForm">
+            <div class="input-group">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-check-circle input-icon"></i>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-phone input-icon"></i>
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number (Optional)">
+            </div>
+            <button type="submit" class="login-button">Create Account</button>
+            <div class="form-footer-links">
+                <p>Already have an account? <a href="login.html" class="create-account-link">Login</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
