@@ -30,4 +30,26 @@ document.addEventListener('DOMContentLoaded', () => {
     featureItems.forEach(item => {
         observer.observe(item);
     });
+
+    // --- Theme Switcher ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    // Apply saved theme on load
+    if (currentTheme) {
+        document.body.classList.add(currentTheme);
+        if (currentTheme === 'light-mode') {
+            themeToggle.checked = true;
+        }
+    }
+
+    themeToggle.addEventListener('change', function() {
+        if (this.checked) {
+            document.body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light-mode');
+        } else {
+            document.body.classList.remove('light-mode');
+            localStorage.setItem('theme', 'dark-mode');
+        }
+    });
 });
